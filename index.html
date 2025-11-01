@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shizor - Acupuncture Point Prescription System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <div class="logo">S</div>
+                <h1>SHIZOR</h1>
+            </div>
+            <p class="subtitle">Acupuncture Point Prescription System</p>
+        </header>
+
+        <!-- Patient Information Section -->
+        <section class="patient-info-section">
+            <h2>Patient Information</h2>
+            <div class="patient-form">
+                <div class="form-group">
+                    <label for="patientName">Patient Name</label>
+                    <input type="text" id="patientName" placeholder="Enter patient name" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="patientAge">Age</label>
+                    <input type="number" id="patientAge" placeholder="Age" class="form-input" min="0" max="150">
+                </div>
+                <div class="form-group">
+                    <label for="patientSex">Sex</label>
+                    <select id="patientSex" class="form-input">
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="tabs">
+                <button class="tab-button active" data-tab="symptoms">Search by Symptoms</button>
+                <button class="tab-button" data-tab="diseases">Search by Diseases</button>
+            </div>
+
+            <div class="tab-content" id="symptomsTab">
+                <div class="search-box">
+                    <label for="symptomsSearch">Select Symptoms (Multiple)</label>
+                    <div class="multi-select-container">
+                        <div class="selected-items" id="selectedSymptoms"></div>
+                        <input type="text" id="symptomsSearch" placeholder="Type to search symptoms..." class="search-input" autocomplete="off">
+                        <div class="dropdown-list" id="symptomsDropdown"></div>
+                    </div>
+                    <button class="btn btn-primary" id="searchSymptomsBtn">Search Points</button>
+                    <button class="btn btn-secondary" id="clearSymptomsBtn">Clear</button>
+                </div>
+            </div>
+
+            <div class="tab-content hidden" id="diseasesTab">
+                <div class="search-box">
+                    <label for="diseasesSearch">Select Diseases (Multiple)</label>
+                    <div class="multi-select-container">
+                        <div class="selected-items" id="selectedDiseases"></div>
+                        <input type="text" id="diseasesSearch" placeholder="Type to search diseases..." class="search-input" autocomplete="off">
+                        <div class="dropdown-list" id="diseasesDropdown"></div>
+                    </div>
+                    <button class="btn btn-primary" id="searchDiseasesBtn">Search Points</button>
+                    <button class="btn btn-secondary" id="clearDiseasesBtn">Clear</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section hidden" id="resultsSection">
+            <div class="results-header">
+                <h2>Matching Acupuncture Points</h2>
+                <div class="results-actions">
+                    <span class="results-count" id="resultsCount">0 points found</span>
+                    <button class="btn btn-select-all" id="selectAllBtn">Select All</button>
+                    <button class="btn btn-deselect-all" id="deselectAllBtn">Deselect All</button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="results-table" id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-col">Select</th>
+                            <th>Meridian System</th>
+                            <th>Point Code</th>
+                            <th>English Name</th>
+                            <th>Chinese Name</th>
+                            <th>Pinyin</th>
+                            <th>Point Category</th>
+                            <th>Indications</th>
+                            <th>Symptoms</th>
+                            <th>Diseases</th>
+                            <th>Functions</th>
+                            <th>Location (Cun)</th>
+                            <th>Anatomical Location</th>
+                            <th>General Location</th>
+                            <th>Contraindications</th>
+                            <th>Needling Depth</th>
+                            <th>Needling Method</th>
+                            <th>Stimulation Method</th>
+                            <th>Electrical Stimulation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="export-section">
+                <button class="btn btn-export" id="exportPdfBtn">Generate Prescription PDF</button>
+            </div>
+        </section>
+
+        <!-- No Results Message -->
+        <section class="no-results hidden" id="noResults">
+            <p>No acupuncture points found matching your search criteria. Please try different symptoms or diseases.</p>
+        </section>
+    </div>
+
+    <script src="search_index.js"></script>
+    <script src="acupuncture_data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
